@@ -88,7 +88,21 @@ Ouvrir la console CMD (invité de commande).
 
   <li><a href="http://localhost:4200/">http://localhost:4200/</a></li>
   
+## Fonctionnement
 
+### Toolbar
+
+* Liste des projets
+
+Permets de lister tous les projets déjà créé et accépder à leurs fonctionnalitées :
+ ** ajouter une ligne
+ ** Détail
+ ** Modifier
+ ** Supprimer
+
+* Créer un Projet
+
+* Gestion des fichiers
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
