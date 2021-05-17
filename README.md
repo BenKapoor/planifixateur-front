@@ -79,7 +79,7 @@ Aller à la racine du projet :
 Ouvrir la console CMD (invité de commande).
 
 1. Démarrer le serveur :
-* npm
+
   ```sh
   npm start
   ```
