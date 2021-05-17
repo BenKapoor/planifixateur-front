@@ -59,8 +59,6 @@ Instructions à suivre pour utiliser l'application.
 
 ### Prérequis
 
-This is an example of how to list things you need to use the software and how to install them.
-
 <b>Installer un serveur node</b>
 
 Prendre la version LTS : <li><a href="https://nodejs.org/en/">Serveur Node</a></li>
