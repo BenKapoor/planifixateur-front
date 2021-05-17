@@ -63,11 +63,13 @@ Cette partie liste les différentes technolohies utilisées lors du développeme
 
 Instructions à suivre pour utiliser l'application.
 
-### Prérequis (Serveur Node)
+### Prérequis
 
 <b>Installer un serveur node</b>
 
 Prendre la version LTS : <li><a href="https://nodejs.org/en/">Serveur Node</a></li>
+
+Une fois le serveur installé, passer à la suite.
 
 ### Installation
 
