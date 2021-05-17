@@ -95,14 +95,18 @@ Ouvrir la console CMD (invité de commande).
 * Liste des projets
 
 Permets de lister tous les projets déjà créé et accépder à leurs fonctionnalitées :
-  * ajouter une ligne
-  * Détail
-  * Modifier
-  * Supprimer
+  `* ajouter une ligne` : Permet de rajouter une ou plusieurs lignes à un projet existant
+  `* Détail` : Permet de visualiser le détail du projet, les différentes lignes qui le compose, ses fichiers (télécharger, supprimer et ajouter), ainsi que différentes info  
+  `* Modifier` : permet de modififier les infos existantes d'un projet
+  `* Supprimer` : supprime le projet en selectionné
 
 * Créer un Projet
 
+Création d'un projet et des lignes.
+
 * Gestion des fichiers
+
+Permet de supprimer les fichiers définitivement. Lié au projet ou non.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
