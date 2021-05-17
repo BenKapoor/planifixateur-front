@@ -95,10 +95,10 @@ Ouvrir la console CMD (invité de commande).
 * Liste des projets
 
 Permets de lister tous les projets déjà créé et accépder à leurs fonctionnalitées :
- ** ajouter une ligne
- ** Détail
- ** Modifier
- ** Supprimer
+  * ajouter une ligne
+  * Détail
+  * Modifier
+  * Supprimer
 
 * Créer un Projet
 
