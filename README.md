@@ -40,7 +40,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][accueil-screenshot]]
 
 Application web utilisant un Web service REST : https://github.com/BenKapoor/planifixateur permettant de gérer ses projets.
 
@@ -89,6 +89,13 @@ Ouvrir la console CMD (invité de commande).
 2. Sur le navigateur de votre choix :
 
   <li><a href="http://localhost:4200/">http://localhost:4200/</a></li>
+  
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[accueil-screenshot]: images/accueil.PNG
+
   
 # Planifixateur
 
