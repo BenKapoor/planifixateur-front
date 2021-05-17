@@ -63,7 +63,7 @@ This is an example of how to list things you need to use the software and how to
 
 Installer un serveur node :
 
-* Prendre la version LTS : <li><a href="https://nodejs.org/en/">Serveur Node</a></li>
+Prendre la version LTS : <li><a href="https://nodejs.org/en/">Serveur Node</a></li>
 
 ### Installation
 
