@@ -63,7 +63,7 @@ Cette partie liste les différentes technolohies utilisées lors du développeme
 
 Instructions à suivre pour utiliser l'application.
 
-### Prérequis
+### Prérequis (Serveur Node)
 
 <b>Installer un serveur node</b>
 
