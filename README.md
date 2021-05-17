@@ -34,6 +34,12 @@
     <li>
       <a href="#usage">Usage</a>
     </li>
+    <li>
+      <a href="#fonctionnement">Fonctionnement</a>
+      <ul>
+        <li><a href="#toolbar">Toolbar</a></li>
+      </ul>
+    </li>
   </ol>
 </details>
 
