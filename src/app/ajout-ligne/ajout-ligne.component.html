@@ -1,0 +1,117 @@
+<div class="conteneur">
+    <h1 style="text-align: center;">Ajout de ligne(s) au projet : {{ projet?.nom }}</h1>
+    <div class="row">
+        <div class="col-sm-12 mx-auto">
+            <div class="card rounded-0 border-0 shadow">
+                <div class="card-body p-5">
+                    <!--  Bootstrap table Projet-->
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nom du projet</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row">{{ projet?.nom }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+  
+                <div class="card-body p-5">
+                  <!--  Bootstrap table Lignes-->
+                  <div class="table-responsive">
+                      <table class="table">
+                          <thead>
+                              <tr>
+                                  <th scope="col">#</th>
+                                  <th scope="col">Libelle</th>
+                                  <th scope="col">Description</th>
+                                  <th scope="col">Tâche</th>
+                                  <th scope="col">Date de début</th>
+                                  <th scope="col">Date de Fin</th>
+                                  <th></th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr *ngFor="let ligne of lignesProjet; let i = index">
+                                  <th scope="row">{{ i + 1 }}</th>
+                                  <td>{{ ligne?.libelle }}</td>
+                                  <td>{{ ligne?.description }}</td>
+                                  <td>{{ ligne?.tache }}</td>
+                                  <td>{{ ligne?.dateDebut | date: 'dd/MM/yyyy hh:mm'}}</td>
+                                  <td>{{ ligne?.dateFin | date: 'dd/MM/yyyy hh:mm'}}</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                      <!-- <div class="empty-table" *ngIf="ligneresp.length === 0">No records found</div> -->
+                  </div> 
+  
+                  <!-- Formualire pour les lignes -->
+                  <form [formGroup]="lignesForm" (ngSubmit)="onSubmitFormL()">
+                    <div class="row">
+                      <div class="col">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Saisir le libellé</mat-label>
+                          <input matInput type="text" formControlName="libelle" placeholder="Libellé" required>
+                        </mat-form-field>
+                        <control-messages [control]="lignesForm.get('libelle')"></control-messages>
+                      </div>
+                
+                      <div class="col">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Tâche</mat-label>
+                          <input type="text"
+                                 placeholder="Pick one or create"
+                                 aria-label="Tâche"
+                                 matInput
+                                 formControlName="tache"
+                                 [formControl]="myControl"
+                                 [matAutocomplete]="auto"
+                                 required>
+                          <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of options" [value]="option">
+                              {{option}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                        <control-messages [control]="lignesForm.get('tache')"></control-messages>
+                      </div>
+                  
+                      <div class="col">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Saisir la date de début</mat-label>
+                          <input matInput type="datetime-local" formControlName="dateDebut" placeholder="Date Début" required>
+                        </mat-form-field>
+                      </div>
+                  
+                      <div class="col">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Saisir la date de fin</mat-label>
+                          <input matInput type="datetime-local" formControlName="dateFin" placeholder="Date Fin" required (blur)="compareTwoDates()">
+                        </mat-form-field>
+                      </div>
+                      <div *ngIf="errordate.isError" class="alert alert-danger">
+                        {{ errordate.errorMessage }}
+                      </div>
+
+                      <div class="col">
+                        <mat-form-field appearance="outline">
+                          <mat-label>Saisir la description</mat-label>
+                          <textarea matInput type="text" formControlName="description" placeholder="Description"></textarea>
+                        </mat-form-field>
+                        <control-messages [control]="lignesForm.get('description')"></control-messages>
+                      </div>
+                    </div>
+                    <button mat-raised-button color="primary" type="submit" class="btn btn-primary" [disabled]="lignesForm.invalid">Ajout de la lignes</button>
+                  </form> 
+                </div>
+                <button mat-raised-button color="primary" type="submit" class="btn btn-primary" (click)="onSumbitMerge()" [disabled]="isDisabled">Soumettre</button>
+            </div>
+        </div>
+    </div>
+  </div>

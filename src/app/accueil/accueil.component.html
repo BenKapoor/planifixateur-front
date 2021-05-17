@@ -1,0 +1,59 @@
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> N° Projet </th>
+      <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="nom">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nb_lignes">
+        <th mat-header-cell *matHeaderCellDef> Nombre de ligne(s) </th>
+        <td mat-cell *matCellDef="let element">  {{element.lignesProjetDto?.length}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="temps_passe">
+        <th mat-header-cell *matHeaderCellDef> Temps passé </th>
+        <td mat-cell *matCellDef="let element">  {{getCount(element)}} </td>
+      </ng-container>
+    
+    <ng-container matColumnDef="star" stickyEnd>
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element; let i = index">
+            <button mat-mini-fab color="primary" aria-label="Example icon-button with a menu" [matMenuTriggerFor]="menu">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item 
+                    (click)="onAddLigne(i)">
+                  <mat-icon>add</mat-icon>
+                  <span>Ajouter Lignes</span>
+                </button>
+                <button mat-menu-item 
+                    (click)="onViewDetail(i)">
+                  <mat-icon>description</mat-icon>
+                  <span>Détail</span>
+                </button>
+                <button mat-menu-item
+                    (click)="onUpdate(i)">
+                  <mat-icon>edit</mat-icon>
+                  <span>Modifier</span>
+                </button>
+                <button mat-menu-item
+                    (click)="onDelete(i)">
+                  <mat-icon>delete_forever</mat-icon>
+                  <span>Supprimer</span>
+                </button>
+              </mat-menu>
+        </td>
+    </ng-container>
+    
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+  </table>
+  <div class="empty-table" *ngIf="dataSource?.length === 0">No records found</div>

@@ -1,0 +1,28 @@
+table {
+    width: 100%;
+}
+
+body {
+    background: #0083B0;
+    background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
+    background: linear-gradient(to right, #0083B0, #00B4DB);
+    min-height: 100vh;
+}
+
+.form-control::placeholder {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+.empty-table {
+    font-size: medium;
+    font-style: italic;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 50px;
+}
+
+#customSearch mat-icon{
+    cursor: pointer;
+}
