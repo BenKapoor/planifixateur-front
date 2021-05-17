@@ -93,7 +93,7 @@ Ouvrir la console CMD (invité de commande).
 ### Toolbar
 
 * Liste des projets : Permets de lister tous les projets déjà créé et accépder à leurs fonctionnalitées 
-  * <u>ajouter une ligne :</u> Permet de rajouter une ou plusieurs lignes à un projet existant
+  * _ajouter une ligne :_ Permet de rajouter une ou plusieurs lignes à un projet existant
   * <u>Détail :</u> Permet de visualiser le détail du projet, les différentes lignes qui le compose, ses fichiers (télécharger, supprimer et ajouter), ainsi que différentes info 
   * <u>Modifier :</u> permet de modififier les infos existantes d'un projet
   * <u>Supprimer :</u> supprime le projet en selectionné
