@@ -40,7 +40,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][accueil-screenshot]](https://example.com)
+[![Product Name Screen Shot][accueil-screenshot]]()
 
 Application web utilisant un Web service REST : https://github.com/BenKapoor/planifixateur permettant de gérer ses projets.
 
