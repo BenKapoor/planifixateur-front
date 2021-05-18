@@ -69,8 +69,8 @@
                                   <td>{{ ligne?.libelle }}</td>
                                   <td>{{ ligne?.description }}</td>
                                   <td>{{ ligne?.tache }}</td>
-                                  <td>{{ ligne?.dateDebut | date: 'dd/MM/yyyy hh:mm'}}</td>
-                                  <td>{{ ligne?.dateFin | date: 'dd/MM/yyyy hh:mm'}}</td>
+                                  <td>{{ ligne?.dateDebut | date: 'medium':'GMT'}}</td>
+                                  <td>{{ ligne?.dateFin | date: 'medium':'GMT'}}</td>
                                   <td>
                                     <!-- <button mat-mini-fab
                                       (click)="onDeleteLigne(ligne)">
@@ -137,7 +137,7 @@
                       <div class="col">
                         <mat-form-field appearance="outline">
                           <mat-label>Saisir la description</mat-label>
-                          <textarea matInput type="text" formControlName="description" placeholder="Description" required></textarea>
+                          <textarea matInput type="text" formControlName="description" placeholder="Description"></textarea>
                         </mat-form-field>
                         <control-messages [control]="lignesForm.get('description')"></control-messages>
                       </div>

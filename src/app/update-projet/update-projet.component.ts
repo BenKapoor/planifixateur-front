@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -104,7 +104,7 @@ export class UpdateProjetComponent implements OnInit {
   initFormLigne(){
     this.lignesForm = this.formBuilder.group({
       libelle: ['',[Validators.required, Validators.maxLength(255)]],
-      description: ['',[Validators.required, Validators.maxLength(255)]],
+      description: ['',[Validators.maxLength(255)]],
       tache: ['',[Validators.required, Validators.maxLength(255)]],
       dateDebut: ['',[Validators.required]],
       dateFin: ['',[Validators.required]]
@@ -114,9 +114,10 @@ export class UpdateProjetComponent implements OnInit {
   updateLigne(id: number){
     this.lignesForm.patchValue({
       libelle: this.lignesProjet[id].libelle,
+      tache : this.lignesProjet[id].tache,
       description: this.lignesProjet[id].description,
-      dateDebut: moment(this.lignesProjet[id].dateDebut).format("YYYY-MM-DDTkk:mm"),
-      dateFin: moment(this.lignesProjet[id].dateFin).format("YYYY-MM-DDTkk:mm")
+      dateDebut: moment(this.lignesProjet[id].dateDebut).utc().format("YYYY-MM-DDTkk:mm"),
+      dateFin: moment(this.lignesProjet[id].dateFin).utc().format("YYYY-MM-DDTkk:mm")
     });   
 
     this.islfDisplayed = false;

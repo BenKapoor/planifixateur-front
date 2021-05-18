@@ -1,4 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AccueilComponent } from './accueil/accueil.component';
 import { AjoutLigneComponent } from './ajout-ligne/ajout-ligne.component';
@@ -9,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 import { ControlMessagesComponent } from './control-messages/control-messages.component';
+import { CustomDatePipe } from './utils/custom.datepipe';
 import { DetailProjetComponent } from './detail-projet/detail-projet.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ListLigneComponent } from './list-ligne/list-ligne.component';
@@ -24,9 +26,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NewLigneComponent } from './new-ligne/new-ligne.component';
-import { NgModule } from '@angular/core';
 import { UpdateProjetComponent } from './update-projet/update-projet.component';
 import { UploadFilesComponent } from './upload-files/upload-files.component';
+import localeFr from '@angular/common/locales/fr';
+import { registerLocaleData } from '@angular/common';
+
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -40,7 +45,9 @@ import { UploadFilesComponent } from './upload-files/upload-files.component';
     AjoutLigneComponent,
     DetailProjetComponent,
     ControlMessagesComponent,
-    UploadFilesComponent
+    UploadFilesComponent,
+    CustomDatePipe
+    
   ],
   imports: [
     BrowserModule,
@@ -64,7 +71,9 @@ import { UploadFilesComponent } from './upload-files/upload-files.component';
   entryComponents: [
     ConfirmationDialogComponent
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: "fr-FR" }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

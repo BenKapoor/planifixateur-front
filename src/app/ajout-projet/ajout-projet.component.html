@@ -64,8 +64,8 @@
                                 <td>{{ ligne?.libelle }}</td>
                                 <td>{{ ligne?.description }}</td>
                                 <td>{{ ligne?.tache }}</td>
-                                <td>{{ ligne?.dateDebut | date: 'dd/MM/yyyy hh:mm' }}</td>
-                                <td>{{ ligne?.dateFin | date: 'dd/MM/yyyy hh:mm' }}</td>
+                                <td>{{ ligne?.dateDebut | date: 'medium':'GMT' }}</td>
+                                <td>{{ ligne?.dateFin | date: 'medium':'GMT' }}</td>
                                 <td>
                                   <button mat-mini-fab
                                     (click)="onDeleteLigne(ligne)">
