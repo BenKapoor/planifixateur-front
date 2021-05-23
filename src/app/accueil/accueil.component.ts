@@ -8,6 +8,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import { ApiService } from './../service/api.service';
 import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { element } from 'protractor';
@@ -20,7 +21,7 @@ import { element } from 'protractor';
 export class AccueilComponent implements OnInit {
 
   displayedColumns: string[] = ['position','nom','nb_lignes', 'temps_passe', 'star'];
-  dataSource: Projet[];
+  dataSource = new MatTableDataSource();
   
   projets: Projet[];
 
@@ -29,17 +30,10 @@ export class AccueilComponent implements OnInit {
   constructor(private api: ApiService, private dialog: MatDialog, private router: Router) {}
 
   ngOnInit(): void {
-    // this.api.projetSubject.subscribe(
-    //   (projets: Projet[]) => {
-    //     this.projets = projets;
-    //     this.dataSource = projets;
-    //   }
-    // );
 
-    // this.api.emitProjetSubject();
     this.api.getAllProjetFromServer().subscribe(data=>{
       this.projets = data;
-      this.dataSource = data;
+      this.dataSource = new MatTableDataSource(data);
     });
 
     // this.onFetch();
@@ -64,21 +58,22 @@ export class AccueilComponent implements OnInit {
     return this.router.navigate(['/projet','update', id]);
   }
 
-  onDelete(i){
+  onDelete(index: number){
     const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
       data:{
         title: 'Confirmation de la suppression',
-        message: 'Etes-vous sûr de vouloir supprimer ce projet : ' + this.projets[i].nom
+        message: 'Etes-vous sûr de vouloir supprimer ce projet : ' + this.projets[index].nom
       }
     });
     confirmDialog.afterClosed().subscribe(result =>{
       if (result === true) {
-        const id = this.projets[i].id;
+        const id = this.projets[index].id;
         // suppression au niveau de la db
         this.api.deleteProjet(id).subscribe();
 
-        // suppression de l'array aau niveau visuel
-        this.dataSource = this.dataSource.filter(item => item.id !== this.projets[i].id);
+        // suppression de l'array au niveau visuel
+        this.dataSource.data.splice(index,1);
+        this.dataSource._updateChangeSubscription();
       }
     });
   }
@@ -88,5 +83,11 @@ export class AccueilComponent implements OnInit {
 
   getCount(element){
     return getTempsParProjet(element);
+  }
+
+  
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

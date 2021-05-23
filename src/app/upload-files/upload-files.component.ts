@@ -70,7 +70,6 @@ export class UploadFilesComponent implements OnInit {
   }
 
   deleteFile(file: FilesDBDto){
-    this.progress = 0;
     const idFile = file.id;
     this.uploadService.deleteFile(idFile).subscribe(
       () => {
@@ -81,7 +80,6 @@ export class UploadFilesComponent implements OnInit {
       },
       (err: any) => {
         console.log(err);
-        this.progress = 0;
 
         if (err.error && err.error.message) {
           this.message = err.error.message;
