@@ -10,8 +10,8 @@ import { Injectable } from '@angular/core';
 })
 export class UploadFileService {
 
-  private baseUrl = 'https://planifixateur.herokuapp.com';
-  // private baseUrl = 'http://localhost:8080/';
+  // private baseUrl = 'https://planifixateur.herokuapp.com';
+  private baseUrl = 'http://localhost:8080/';
   
   constructor(private http: HttpClient) { }
 

@@ -10,8 +10,8 @@ import { Injectable } from '@angular/core';
 })
 export class ApiService {
 
-  private baseUrl = 'https://planifixateur.herokuapp.com';
-  // private baseUrl = 'http://localhost:8080/';
+  // private baseUrl = 'https://planifixateur.herokuapp.com';
+  private baseUrl = 'http://localhost:8080/';
   
   private projets: Projet[] = [];
 
@@ -104,6 +104,14 @@ export class ApiService {
 
   deleteLigne(id: number): Observable<LignesProjetDto>{
     return this.httpClient.delete<LignesProjetDto>(`${this.baseUrl}`+'/lignesprojet/' + id)
+    .pipe(
+      retry(1),
+      catchError(this.handleError)
+    );
+  }
+
+  deleteLigneFromProjet(projetId: number, ligneId: number): Observable<Projet>{
+    return this.httpClient.delete<LignesProjetDto>(`${this.baseUrl}`+'/projets/' + projetId + '/lignesprojet/' +  ligneId + '/remove')
     .pipe(
       retry(1),
       catchError(this.handleError)

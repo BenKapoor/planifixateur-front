@@ -7,6 +7,7 @@ import { LignesProjetDto, Projet } from './../models/projet.model';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from './../service/api.service';
 import { Observable } from 'rxjs';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-update-projet',
@@ -35,13 +36,14 @@ export class UpdateProjetComponent implements OnInit {
 
   lignesForm: FormGroup;  
   posLigneTab: number;
+  idProjet: number;
 
   constructor(private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
-    const id = this.route.snapshot.params['id'];
+    this.idProjet = this.route.snapshot.params['id'];
 
-    this.getProjet(id);
+    this.getProjet(this.idProjet);
     this.getLigneFromServe();
     
 
@@ -180,5 +182,18 @@ export class UpdateProjetComponent implements OnInit {
     }, []);
     return tache_filtered;
  } 
+
+  onDeleteLigne(ligne: LignesProjetDto){
+    const index = this.lignesProjet.indexOf(ligne);
+
+    const idL = this.lignesProjet[index].id;
+
+    this.api.deleteLigneFromProjet(this.idProjet, idL).subscribe(resp => {
+      console.log(resp);
+      
+    })
+    // supprime la ligne de l'array affiché
+    this.lignesProjet.splice(index,1)
+  }
 
 }

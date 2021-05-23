@@ -70,10 +70,27 @@ export class UploadFilesComponent implements OnInit {
   }
 
   deleteFile(file: FilesDBDto){
+    this.progress = 0;
     const idFile = file.id;
-    this.uploadService.deleteFile(idFile).subscribe(data => {
-      // retourne le message de validation de la supp ou non
-    });
+    this.uploadService.deleteFile(idFile).subscribe(
+      () => {
+        this.fileInfos = this.uploadService.getFiles();  
+        this.fileInfos.subscribe(data => {
+          console.log(data)
+        })            
+      },
+      (err: any) => {
+        console.log(err);
+        this.progress = 0;
+
+        if (err.error && err.error.message) {
+          this.message = err.error.message;
+        } else {
+          this.message = 'Could not upload the file!';
+        }
+
+        this.currentFile = undefined;
+      });
   }
 
 }

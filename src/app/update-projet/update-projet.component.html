@@ -61,6 +61,7 @@
                                   <th scope="col">Date de début</th>
                                   <th scope="col">Date de Fin</th>
                                   <th></th>
+                                  <th></th>
                               </tr>
                           </thead>
                           <tbody>
@@ -72,13 +73,15 @@
                                   <td>{{ ligne?.dateDebut | date: 'medium':'GMT'}}</td>
                                   <td>{{ ligne?.dateFin | date: 'medium':'GMT'}}</td>
                                   <td>
-                                    <!-- <button mat-mini-fab
+                                    <p>
+                                      <button mat-raised-button color="primary" (click)="updateLigne(i)">Update ligne</button>
+                                    </p>
+                                  </td>
+                                  <td>
+                                    <button mat-mini-fab
                                       (click)="onDeleteLigne(ligne)">
-                                    <mat-icon>delete_forever</mat-icon>
-                                  </button> -->
-                                  <p>
-                                    <button mat-raised-button color="primary" (click)="updateLigne(i)">Update ligne</button>
-                                </p>
+                                      <mat-icon>delete_forever</mat-icon>
+                                    </button>
                                   </td>
                               </tr>
                           </tbody>
