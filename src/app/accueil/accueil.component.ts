@@ -1,17 +1,15 @@
-import * as moment from 'moment';
-
-import { Component, OnInit } from '@angular/core';
-import { LignesProjetDto, Projet } from './../models/projet.model';
-import Util, { getTempsParProjet } from './../utils/util';
-import {animate, state, style, transition, trigger} from '@angular/animations';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { ApiService } from './../service/api.service';
 import { ConfirmationDialogComponent } from '../shared/confirmation-dialog/confirmation-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { Projet } from './../models/projet.model';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { element } from 'protractor';
+import { getTempsParProjet } from './../utils/util';
 
 @Component({
   selector: 'app-accueil',
@@ -21,22 +19,30 @@ import { element } from 'protractor';
 export class AccueilComponent implements OnInit {
 
   displayedColumns: string[] = ['position','nom','nb_lignes', 'temps_passe', 'star'];
-  dataSource = new MatTableDataSource();
+  dataSource: MatTableDataSource<Projet>;
   
   projets: Projet[];
 
   projetSuscribtion: Subscription;
 
-  constructor(private api: ApiService, private dialog: MatDialog, private router: Router) {}
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+  constructor(private api: ApiService, private dialog: MatDialog, private router: Router) {
+    
+  }
 
   ngOnInit(): void {
+    this._getApiProjets();
+  }
 
+  private _getApiProjets(){
     this.api.getAllProjetFromServer().subscribe(data=>{
       this.projets = data;
-      this.dataSource = new MatTableDataSource(data);
+      this.dataSource = new MatTableDataSource<Projet>(data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     });
-
-    // this.onFetch();
   }
 
   onFetch(){
@@ -78,16 +84,16 @@ export class AccueilComponent implements OnInit {
     });
   }
 
-  tempsPasse: string = '';
-  arrayTemps: any[] = [];
-
   getCount(element){
     return getTempsParProjet(element);
   }
 
-  
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 }

@@ -12,36 +12,11 @@ export class ApiService {
 
   // private baseUrl = 'https://planifixateur.herokuapp.com';
   private baseUrl = 'http://localhost:8080/';
-  
-  private projets: Projet[] = [];
-
-  // private lignesprojet: LignesProjetDto[] = [];
-
-  // lignesSubject = new Subject<LignesProjetDto[]>();
 
   projetSubject = new Subject<Projet[]>();
 
   constructor(private httpClient: HttpClient) { }
 
-
-  // emitProjetSubject(){
-  //   this.projetSubject.next(this.projets.slice());
-  // }
-
-  // getAllProjetFromServer(){
-  //   this.httpClient
-  //       .get<Projet[]>(`${this.baseUrl}`+'/projets')
-  //       .subscribe(
-  //         (response) => {
-  //           this.projets = response;
-  //           this.emitProjetSubject();
-  //         },
-  //         (error) => {
-  //           console.log(error);
-            
-  //         }
-  //       )
-  // }
   getAllProjetFromServer(): Observable<Projet[]>{
     return this.httpClient.get<Projet[]>(`${this.baseUrl}`+'/projets')
     .pipe(
