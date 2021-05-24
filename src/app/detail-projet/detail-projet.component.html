@@ -6,7 +6,7 @@
 
 <div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-6">
           <label class="btn btn-default p-0">
             <input type="file" (change)="selectFile($event)" />
           </label>
@@ -17,6 +17,10 @@
             Upload
           </button>
         </div>
+
+        <div class="col-2">
+            <button mat-raised-button color="primary" (click)="generatePDF()">Générer PDF</button> 
+          </div>
     </div>
       
     <div *ngIf="currentFile" class="progress my-3">
@@ -101,19 +105,3 @@
         </mat-card-content>
     </mat-card>
 </div>
-
-<!-- <div *ngFor="let file of fileProjet">
-    <p >
-        {{ file | json }}
-        
-    </p>
-</div>
-    <ul
-        *ngFor="let file of fileProjet"
-        class="list-group list-group-flush">
-        <li class="list-group-item">
-            <a href="http://localhost:8080/files/{{ file?.id }}">{{ file?.name }}</a>
-        </li>
-    </ul> -->
-    
-    

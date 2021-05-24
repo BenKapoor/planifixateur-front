@@ -1,13 +1,17 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import * as moment from 'moment-timezone';
+
+import { Component, OnInit } from '@angular/core';
 import { FilesDBDto, Projet } from './../models/projet.model';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { getTempsParLigne, getTempsParProjet } from '../utils/util';
 
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from './../service/api.service';
-import { Observable } from 'rxjs';
 import { UploadFileService } from './../service/upload-file.service';
-import { element } from 'protractor';
+import pdfFonts from "pdfmake/build/vfs_fonts";
+import pdfMake from "pdfmake/build/pdfmake";
+
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 @Component({
   selector: 'app-detail-projet',
@@ -23,7 +27,6 @@ export class DetailProjetComponent implements OnInit {
   currentFile?: File;
   progress = 0;
   message = '';
-  // fileInfos?: Observable<any>;
   fileProjet?: FilesDBDto[] = [];
   
   pres: Projet;
@@ -123,4 +126,125 @@ export class DetailProjetComponent implements OnInit {
       this.ngOnInit();
     });
   }
+
+  generatePDF() {  
+    let index_row = 1;
+    let docDefinition = {  
+      info: { title: this.projet.nom + new Date().toLocaleString() },
+      // watermark: { text: 'test watermark', color: 'blue', opacity: 0.3, bold: true, italics: false },
+      footer: function(currentPage, pageCount) { return currentPage.toString() + ' of ' + pageCount; },
+      header: function(currentPage, pageCount, pageSize) {
+        return [
+          { text: 'Planifixateur', alignment: (currentPage % 2) ? 'left' : 'right', fontSize: 9, },
+          { canvas: [ { type: 'rect', x: 170, y: 32, w: pageSize.width - 170, h: 40 } ] }
+        ]
+      },
+      content: [  
+        // {  
+        //   text: 'Planifixateur',  
+        //   fontSize: 16,  
+        //   alignment: 'center',  
+        //   color: '#047886'  
+        // },  
+        {  
+          text: this.projet.nom,  
+          fontSize: 20,  
+          bold: true,  
+          alignment: 'center',  
+          decoration: 'underline',  
+          color: 'skyblue',
+        },
+        {  
+          columns: [
+            { 
+              stack : [ 
+                [   
+                  {   
+                    text: 'Nombre de tâches : ' + this.projet.lignesProjetDto.length, 
+                    italic: true,
+                  },   
+                ], 
+              ],
+              alignement: 'left',
+              fontSize: 10,
+              margin: [5, 15]
+            },
+            { 
+              stack : [  
+                [  
+                  {  
+                      text: `Réalisé le : ${new Date().toLocaleString()}`,  
+                      alignment: 'right'  
+                  }, 
+                  {  
+                    text: `Temps Total : ${this.getCount(this.projet)}`,  
+                    alignment: 'right'  
+                  },  
+                ]
+              ],
+              fontSize: 10,
+              margin: [5, 15]
+            },   
+          ]  
+        },
+      {  
+        text: 'Détail des lignes',  
+        style: 'sectionHeader'  
+      },  
+      {  
+        style: 'table',
+        layout: 'lightHorizontalLines',
+        table: {  
+            headerRows: 1,  
+            widths: ['*', 'auto', 'auto', 90, 90, 'auto', 'auto'],  
+            body: [  
+                ['','Début', 'Fin', 'Tâche', 'Description', 'Libellé', 'Temps'],  
+                ...this.projet.lignesProjetDto.map(p => (
+                  [
+                    index_row++, 
+                    moment(p.dateDebut).format("MM-DD-YYYY kk:mm"), 
+                    moment(p.dateFin).format("MM-DD-YYYY kk:mm"), 
+                    p.tache, 
+                    p.description, 
+                    p.libelle, 
+                    this._transfoSecEnJHMS(p.tempsTotal)
+                  ])),  
+                [{ text: 'Total', colSpan: 3,  bold: true}, {}, {}, {}, {}, {}, { text : this.getCount(this.projet),  bold: true}]
+            ]  
+        },
+          
+      }  
+      ],
+        styles: {  
+          sectionHeader: {  
+              bold: true,  
+              decoration: 'underline',  
+              fontSize: 14,  
+              margin: [0, 15, 0, 15]  
+          },
+          table: {
+              fontSize: 8,
+              alignment: 'left',
+              color: 'black',
+              margin: [0, 5, 0, 15]
+          }, 
+        }     
+    };  
+   
+    pdfMake.createPdf(docDefinition).open();  
+  }  
+
+  _transfoSecEnJHMS(seconds: number) {
+    seconds = Number(seconds);
+    var j = Math.floor(seconds / (3600*24));
+    var h = Math.floor(seconds % (3600*24) / 3600);
+    var m = Math.floor(seconds % 3600 / 60);
+    var s = Math.floor(seconds % 60);
+    
+    var jDisplay = j > 0 ? j + (j == 1 ? " jour " : " jours ") : "";
+    var hDisplay = h > 0 ? h + (h == 1 ? " heure " : " heures ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute " : " minutes ") : "";
+    var sDisplay = s > 0 ? s + (s == 1 ? " seconde" : " secondes") : "";
+    return jDisplay + hDisplay + mDisplay + sDisplay;
+}
 }

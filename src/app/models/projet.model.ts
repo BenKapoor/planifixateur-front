@@ -9,6 +9,7 @@ export class Projet {
 
 export class LignesProjetDto {
     public id?: number
+    public tempsTotal?: number
     constructor(
         public libelle?: string,
         public description?: string,
