@@ -2,6 +2,7 @@ export class Projet {
     public id?: number
     public lignesProjetDto?: LignesProjetDto[]
     public filesDBDto?: FilesDBDto[]
+    public tempsTotal?: number
     constructor(
         public nom?: string
     ){}

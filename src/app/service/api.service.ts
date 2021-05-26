@@ -1,5 +1,5 @@
 import { LignesProjetDto, Projet, TacheDto } from './../models/projet.model';
-import { Observable, Subject, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 
 import { HttpClient } from '@angular/common/http';
@@ -10,10 +10,8 @@ import { Injectable } from '@angular/core';
 })
 export class ApiService {
 
-  private baseUrl = 'https://planifixateur.herokuapp.com';
-  // private baseUrl = 'http://localhost:8080/';
-
-  projetSubject = new Subject<Projet[]>();
+  // private baseUrl = 'https://planifixateur.herokuapp.com';
+  private baseUrl = 'http://localhost:8080/';
 
   constructor(private httpClient: HttpClient) { }
 

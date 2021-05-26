@@ -9,7 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Projet } from './../models/projet.model';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { getTempsParProjet } from './../utils/util';
+import { transfoSecEnJHMS } from './../utils/util';
 
 @Component({
   selector: 'app-accueil',
@@ -49,43 +49,49 @@ export class AccueilComponent implements OnInit {
     this.api.getAllProjetFromServer();
   }
 
-  onAddLigne(i){
-    const id = this.projets[i].id;
+  onAddLigne(element: Projet){
+
+    const id = element.id;
     return this.router.navigate(['/projet','add-ligne', id]);
   }
 
-  onViewDetail(i){
-    const id = this.projets[i].id;
+  onViewDetail(element: Projet){
+    const id = element.id;
     return this.router.navigate(['/projet','view', id]);
   }
 
-  onUpdate(i){
-    const id = this.projets[i].id;
+  onUpdate(element: Projet){
+    const id = element.id;
     return this.router.navigate(['/projet','update', id]);
   }
 
-  onDelete(index: number){
+  onDelete(element: Projet){    
     const confirmDialog = this.dialog.open(ConfirmationDialogComponent, {
       data:{
         title: 'Confirmation de la suppression',
-        message: 'Etes-vous sûr de vouloir supprimer ce projet : ' + this.projets[index].nom
+        message: 'Etes-vous sûr de vouloir supprimer ce projet : ' + element.nom
       }
     });
     confirmDialog.afterClosed().subscribe(result =>{
       if (result === true) {
-        const id = this.projets[index].id;
+        const id = element.id;
         // suppression au niveau de la db
         this.api.deleteProjet(id).subscribe();
 
+        // retrouver la position dans le data source grâce à l'id de l'objet
+        const index = this.dataSource.data.indexOf(element)
+        
         // suppression de l'array au niveau visuel
-        this.dataSource.data.splice(index,1);
+         this.dataSource.data.splice(index,1);
+        
         this.dataSource._updateChangeSubscription();
+
       }
     });
   }
 
-  getCount(element){
-    return getTempsParProjet(element);
+  getCount(element: Projet){
+    return transfoSecEnJHMS(element.tempsTotal);
   }
 
   applyFilter(event: Event) {

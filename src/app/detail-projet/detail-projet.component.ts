@@ -1,15 +1,15 @@
 import * as moment from 'moment-timezone';
 
 import { Component, OnInit } from '@angular/core';
-import { FilesDBDto, Projet } from './../models/projet.model';
+import { FilesDBDto, LignesProjetDto, Projet } from './../models/projet.model';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { getTempsParLigne, getTempsParProjet } from '../utils/util';
 
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from './../service/api.service';
 import { UploadFileService } from './../service/upload-file.service';
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import pdfMake from "pdfmake/build/pdfmake";
+import { transfoSecEnJHMS } from '../utils/util';
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -50,12 +50,12 @@ export class DetailProjetComponent implements OnInit {
     });
   }
 
-  getCount(element){
-    return getTempsParProjet(element);
+  getCount(element: Projet){
+    return transfoSecEnJHMS(element?.tempsTotal);
   }
 
-  getCountLigne(element){
-    return getTempsParLigne(element);
+  getCountLigne(element: LignesProjetDto){
+    return transfoSecEnJHMS(element?.tempsTotal);
   }
 
   selectFile(event: any): void {
@@ -177,7 +177,7 @@ export class DetailProjetComponent implements OnInit {
                       alignment: 'right'  
                   }, 
                   {  
-                    text: `Temps Total : ${this.getCount(this.projet)}`,  
+                    text: `Temps Total : ${transfoSecEnJHMS(this.projet.tempsTotal)}`,  
                     alignment: 'right'  
                   },  
                 ]
@@ -199,17 +199,17 @@ export class DetailProjetComponent implements OnInit {
             widths: ['*', 'auto', 'auto', 90, 90, 'auto', 'auto'],  
             body: [  
                 ['','Début', 'Fin', 'Tâche', 'Description', 'Libellé', 'Temps'],  
-                ...this.projet.lignesProjetDto.map(p => (
+                ...this.projet.lignesProjetDto.map(ligne => (
                   [
                     index_row++, 
-                    moment(p.dateDebut).format("MM-DD-YYYY kk:mm"), 
-                    moment(p.dateFin).format("MM-DD-YYYY kk:mm"), 
-                    p.tache, 
-                    p.description, 
-                    p.libelle, 
-                    this._transfoSecEnJHMS(p.tempsTotal)
+                    moment(ligne.dateDebut).format("MM-DD-YYYY kk:mm"), 
+                    moment(ligne.dateFin).format("MM-DD-YYYY kk:mm"), 
+                    ligne.tache, 
+                    ligne.description, 
+                    ligne.libelle, 
+                    transfoSecEnJHMS(ligne.tempsTotal)
                   ])),  
-                [{ text: 'Total', colSpan: 3,  bold: true}, {}, {}, {}, {}, {}, { text : this.getCount(this.projet),  bold: true}]
+                [{ text: 'Total', colSpan: 3,  bold: true}, {}, {}, {}, {}, {}, { text : transfoSecEnJHMS(this.projet.tempsTotal),  bold: true}]
             ]  
         },
           
@@ -234,17 +234,17 @@ export class DetailProjetComponent implements OnInit {
     pdfMake.createPdf(docDefinition).open();  
   }  
 
-  _transfoSecEnJHMS(seconds: number) {
-    seconds = Number(seconds);
-    var j = Math.floor(seconds / (3600*24));
-    var h = Math.floor(seconds % (3600*24) / 3600);
-    var m = Math.floor(seconds % 3600 / 60);
-    var s = Math.floor(seconds % 60);
+  // _transfoSecEnJHMS(seconds: number) {
+  //   seconds = Number(seconds);
+  //   var j = Math.floor(seconds / (3600*24));
+  //   var h = Math.floor(seconds % (3600*24) / 3600);
+  //   var m = Math.floor(seconds % 3600 / 60);
+  //   var s = Math.floor(seconds % 60);
     
-    var jDisplay = j > 0 ? j + (j == 1 ? " jour " : " jours ") : "";
-    var hDisplay = h > 0 ? h + (h == 1 ? " heure " : " heures ") : "";
-    var mDisplay = m > 0 ? m + (m == 1 ? " minute " : " minutes ") : "";
-    var sDisplay = s > 0 ? s + (s == 1 ? " seconde" : " secondes") : "";
-    return jDisplay + hDisplay + mDisplay + sDisplay;
-}
+  //   var jDisplay = j > 0 ? j + (j == 1 ? " jour " : " jours ") : "";
+  //   var hDisplay = h > 0 ? h + (h == 1 ? " heure " : " heures ") : "";
+  //   var mDisplay = m > 0 ? m + (m == 1 ? " minute " : " minutes ") : "";
+  //   var sDisplay = s > 0 ? s + (s == 1 ? " seconde" : " secondes") : "";
+  //   return jDisplay + hDisplay + mDisplay + sDisplay;
+  // }
 }

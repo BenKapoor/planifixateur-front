@@ -17,6 +17,14 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "mathjs",
+              "seedrandom",
+              "typed-function",
+              "decimal.js",
+              "fraction.js",
+              "complex.js"
+            ],
             "outputPath": "dist/planifixateur",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -32,7 +40,8 @@
               "src/styles.scss"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js"
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/apexcharts/dist/apexcharts.min.js"
             ]
           },
           "configurations": {

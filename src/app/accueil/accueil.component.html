@@ -34,22 +34,22 @@
         </button>
         <mat-menu #menu="matMenu">
             <button mat-menu-item 
-                (click)="onAddLigne(i)">
+                (click)="onAddLigne(element)">
               <mat-icon>add</mat-icon>
               <span>Ajouter Lignes</span>
             </button>
             <button mat-menu-item 
-                (click)="onViewDetail(i)">
+                (click)="onViewDetail(element)">
               <mat-icon>description</mat-icon>
               <span>Détail</span>
             </button>
             <button mat-menu-item
-                (click)="onUpdate(i)">
+                (click)="onUpdate(element)">
               <mat-icon>edit</mat-icon>
               <span>Modifier</span>
             </button>
             <button mat-menu-item
-                (click)="onDelete(i)">
+                (click)="onDelete(element)">
               <mat-icon>delete_forever</mat-icon>
               <span>Supprimer</span>
             </button>

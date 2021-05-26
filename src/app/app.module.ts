@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confirmation-dialog.component';
 import { ControlMessagesComponent } from './control-messages/control-messages.component';
 import { CustomDatePipe } from './utils/custom.datepipe';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailProjetComponent } from './detail-projet/detail-projet.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ListLigneComponent } from './list-ligne/list-ligne.component';
@@ -27,6 +28,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NewLigneComponent } from './new-ligne/new-ligne.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 import { UpdateProjetComponent } from './update-projet/update-projet.component';
 import { UploadFilesComponent } from './upload-files/upload-files.component';
 import localeFr from '@angular/common/locales/fr';
@@ -47,7 +49,8 @@ registerLocaleData(localeFr);
     DetailProjetComponent,
     ControlMessagesComponent,
     UploadFilesComponent,
-    CustomDatePipe
+    CustomDatePipe,
+    DashboardComponent
     
   ],
   imports: [
@@ -68,7 +71,8 @@ registerLocaleData(localeFr);
     MatAutocompleteModule,
     MatCardModule,
     MatSnackBarModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgApexchartsModule
   ],
   entryComponents: [
     ConfirmationDialogComponent

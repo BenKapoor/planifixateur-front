@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccueilComponent } from './accueil/accueil.component';
 import { AjoutLigneComponent } from './ajout-ligne/ajout-ligne.component';
 import { AjoutProjetComponent } from './ajout-projet/ajout-projet.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailProjetComponent } from './detail-projet/detail-projet.component';
 import { ListLigneComponent } from './list-ligne/list-ligne.component';
 import { NewLigneComponent } from './new-ligne/new-ligne.component';
@@ -11,6 +12,7 @@ import { UpdateProjetComponent } from './update-projet/update-projet.component';
 import { UploadFilesComponent } from './upload-files/upload-files.component';
 
 const routes: Routes = [
+  { path: 'dashboard', component: DashboardComponent},
   { path: 'upload', component: UploadFilesComponent},
   { path: 'projet/add-ligne/:id', component: AjoutLigneComponent},
   { path: 'projet/view/:id', component: DetailProjetComponent},
