@@ -6,7 +6,6 @@ import { AjoutProjetComponent } from './ajout-projet/ajout-projet.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DetailProjetComponent } from './detail-projet/detail-projet.component';
 import { ListLigneComponent } from './list-ligne/list-ligne.component';
-import { NewLigneComponent } from './new-ligne/new-ligne.component';
 import { NgModule } from '@angular/core';
 import { UpdateProjetComponent } from './update-projet/update-projet.component';
 import { UploadFilesComponent } from './upload-files/upload-files.component';

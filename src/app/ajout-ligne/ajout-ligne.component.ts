@@ -1,9 +1,10 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { LignesProjetDto, Projet } from './../models/projet.model';
 
-import { ActivatedRoute } from '@angular/router';
 import { ApiService } from './../service/api.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -34,7 +35,13 @@ export class AjoutLigneComponent implements OnInit {
   idProjet: number;
 
   isDisabled = true;
-  constructor(private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder) { }
+  constructor(private route: ActivatedRoute, private api: ApiService, private formBuilder: FormBuilder, public snackBar: MatSnackBar, private router: Router) { }
+
+  private _openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+       duration: 2000
+    });
+  }
 
   ngOnInit(): void {
     this.idProjet = this.route.snapshot.params['id'];
@@ -86,9 +93,13 @@ export class AjoutLigneComponent implements OnInit {
   onSumbitMerge(){
     for (let i = 0; i < this.ligneresp.length; i++) {
       this.api.addLigneToProjet(this.projet, this.ligneresp[i]).subscribe(data => {
-        console.log(data);
       }) 
     }
+
+    this._openSnackBar('L\'ajout des nouvelles lignes s\'est correctement effectué !','');
+    setTimeout(() => {
+      this.router.navigate(['accueil']);
+    }, 2500);
   }
 
   errordate:any={isError:false,errorMessage:''};

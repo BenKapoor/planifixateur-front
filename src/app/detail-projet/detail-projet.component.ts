@@ -104,13 +104,11 @@ export class DetailProjetComponent implements OnInit {
     }
   }
 
-  _addFileProjet(){
-    console.log(this.body)
-
+  private _addFileProjet(){
     this.uploadService.addFileToProjet(this.projet,this.body?.id).subscribe();
   }
 
-  _getFileProjet(){
+  private _getFileProjet(){
     this.api.getProjetFromServer(this.idProjet).subscribe(data => {
       this.fileProjet = data.filesDBDto;
       this.fileProjet = [...this.fileProjet]
@@ -233,18 +231,4 @@ export class DetailProjetComponent implements OnInit {
    
     pdfMake.createPdf(docDefinition).open();  
   }  
-
-  // _transfoSecEnJHMS(seconds: number) {
-  //   seconds = Number(seconds);
-  //   var j = Math.floor(seconds / (3600*24));
-  //   var h = Math.floor(seconds % (3600*24) / 3600);
-  //   var m = Math.floor(seconds % 3600 / 60);
-  //   var s = Math.floor(seconds % 60);
-    
-  //   var jDisplay = j > 0 ? j + (j == 1 ? " jour " : " jours ") : "";
-  //   var hDisplay = h > 0 ? h + (h == 1 ? " heure " : " heures ") : "";
-  //   var mDisplay = m > 0 ? m + (m == 1 ? " minute " : " minutes ") : "";
-  //   var sDisplay = s > 0 ? s + (s == 1 ? " seconde" : " secondes") : "";
-  //   return jDisplay + hDisplay + mDisplay + sDisplay;
-  // }
 }

@@ -55,7 +55,6 @@ export class UpdateProjetComponent implements OnInit {
   getProjet(id: number){
     this.api.getProjetFromServer(id).subscribe(
       data => {
-        console.log(data);
         this.projet = data;
         this.lignesProjet = data.lignesProjetDto;
       }
@@ -129,7 +128,6 @@ export class UpdateProjetComponent implements OnInit {
   onSubmitFormL(){
     
     const idL = this.lignesProjet[this.posLigneTab].id;
-    console.log(idL);
     const formValue = this.lignesForm.value;
     
     const updateLigne = new LignesProjetDto(
@@ -165,7 +163,6 @@ export class UpdateProjetComponent implements OnInit {
       this.lignes = data;
 
       this.options = this.getTache(this.lignes);
-      console.log(this.options);
     })
   }
 
@@ -188,10 +185,7 @@ export class UpdateProjetComponent implements OnInit {
 
     const idL = this.lignesProjet[index].id;
 
-    this.api.deleteLigneFromProjet(this.idProjet, idL).subscribe(resp => {
-      console.log(resp);
-      
-    })
+    this.api.deleteLigneFromProjet(this.idProjet, idL).subscribe()
     // supprime la ligne de l'array affiché
     this.lignesProjet.splice(index,1)
   }

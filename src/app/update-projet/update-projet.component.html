@@ -14,19 +14,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr *ngFor="let projet of spresp; let i = index"> -->
                                 <tr>
                                     <td scope="row">{{ projet?.nom }}</td>
-                                    <td>
-                                      <!-- <button mat-mini-fab
-                                        (click)="onDeleteProjet(projet)">
-                                      <mat-icon>delete_forever</mat-icon>
-                                    </button> -->
-                                    </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <!-- <div class="empty-table" *ngIf="spresp.length === 0">No records found</div> -->
                     </div>
   
                     <!-- Formualire pour le projet --> 
@@ -86,7 +78,6 @@
                               </tr>
                           </tbody>
                       </table>
-                      <!-- <div class="empty-table" *ngIf="ligneresp.length === 0">No records found</div> -->
                   </div> 
   
                   <!-- Formualire pour les lignes -->
@@ -149,7 +140,6 @@
                   </form> 
         
               </div>
-              <!-- <button mat-raised-button color="primary" type="submit" class="btn btn-primary" (click)="onSumbitMerge()" [disabled]="lignesForm.invalid || projetForm.invalid">Soumettre</button> -->
             </div>
         </div>
     </div>

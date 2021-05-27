@@ -43,7 +43,7 @@ export class AjoutProjetComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private api: ApiService, public snackBar: MatSnackBar, private router: Router) { }
 
-  _openSnackBar(message: string, action: string) {
+  private _openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
        duration: 2000
     });
@@ -79,7 +79,6 @@ export class AjoutProjetComponent implements OnInit {
 
       //Récupération de l'objet enregistré (id, nom, etc)
       this.spresp.push(data);
-      console.log(this.spresp);
     })
     // Réinitialisation du fomulaire après chaque submit
     // this.projetForm.reset();
@@ -119,9 +118,6 @@ export class AjoutProjetComponent implements OnInit {
   }
 
   onSumbitMerge(){
-    const idP = this.spresp[0].id;
-    console.log(idP);
-    // let idligne;
     for (let i = 0; i < this.ligneresp.length; i++) {
       this.api.addLigneToProjet(this.spresp[0], this.ligneresp[i]).subscribe()
     }

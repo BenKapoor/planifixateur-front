@@ -27,7 +27,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { NewLigneComponent } from './new-ligne/new-ligne.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { UpdateProjetComponent } from './update-projet/update-projet.component';
 import { UploadFilesComponent } from './upload-files/upload-files.component';
@@ -42,7 +41,6 @@ registerLocaleData(localeFr);
     AccueilComponent,
     AjoutProjetComponent,
     ListLigneComponent,
-    NewLigneComponent,
     ConfirmationDialogComponent,
     UpdateProjetComponent,
     AjoutLigneComponent,

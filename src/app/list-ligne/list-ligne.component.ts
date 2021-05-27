@@ -1,7 +1,8 @@
-import { LignesProjetDto, Projet } from './../models/projet.model';
-import { ApiService } from './../service/api.service';
 import { Component, OnInit } from '@angular/core';
+import { LignesProjetDto, Projet } from './../models/projet.model';
+
 import { ActivatedRoute } from '@angular/router';
+import { ApiService } from './../service/api.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -21,13 +22,11 @@ export class ListLigneComponent implements OnInit {
 
   ngOnInit(): void {
     const id = this.route.snapshot.params['id'];
-    console.log(id);
-    
+
     this.lignesSubscription = this.api.getProjetFromServer(id).subscribe(
       data => {
         this.projet = data;
       }
     )
   }
-
 }

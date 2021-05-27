@@ -46,9 +46,7 @@ export class UploadFilesComponent implements OnInit {
             } else if (event instanceof HttpResponse) {
               this.message = event.body.message;
               this.fileInfos = this.uploadService.getFiles();  
-              this.fileInfos.subscribe(data => {
-                console.log(data)
-              })            
+              this.fileInfos.subscribe()            
             }
           },
           (err: any) => {
