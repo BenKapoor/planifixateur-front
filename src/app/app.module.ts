@@ -12,20 +12,24 @@ import { ConfirmationDialogComponent } from './shared/confirmation-dialog/confir
 import { ControlMessagesComponent } from './control-messages/control-messages.component';
 import { CustomDatePipe } from './utils/custom.datepipe';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DatePipe } from '@angular/common';
 import { DetailProjetComponent } from './detail-projet/detail-projet.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ListLigneComponent } from './list-ligne/list-ligne.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { UpdateProjetComponent } from './update-projet/update-projet.component';
@@ -70,13 +74,17 @@ registerLocaleData(localeFr);
     MatCardModule,
     MatSnackBarModule,
     MatPaginatorModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatTabsModule 
   ],
   entryComponents: [
     ConfirmationDialogComponent
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: "fr-FR" }
+    { provide: LOCALE_ID, useValue: "fr-FR" },
+    
   ],
   bootstrap: [AppComponent]
 })

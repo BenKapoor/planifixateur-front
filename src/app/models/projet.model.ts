@@ -11,6 +11,7 @@ export class Projet {
 export class LignesProjetDto {
     public id?: number
     public tempsTotal?: number
+    public plainProjetDto: ProjetDto
     constructor(
         public libelle?: string,
         public description?: string,
@@ -18,6 +19,11 @@ export class LignesProjetDto {
         public dateDebut?: Date,
         public dateFin?: Date
     ){}
+}
+
+export class ProjetDto {
+    public id?: number
+    public nom?: string
 }
 
 export class TacheDto {

@@ -1,5 +1,6 @@
 import * as math from 'mathjs';
 
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -12,10 +13,13 @@ import {
   ApexYAxis,
   ChartComponent
 } from "ng-apexcharts";
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { ApiService } from './../service/api.service';
 import { LignesProjetDto } from './../models/projet.model';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Projet } from '../models/projet.model';
 import { StatisticsService } from './../service/statistics.service';
 import { transfoSecEnJHMS } from '../utils/util';
@@ -39,25 +43,39 @@ export type ChartOptions = {
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewInit {
   listProjets: Projet[];
   listLignes: LignesProjetDto[] = [];
   topProjets: Projet[];
   topLignes: LignesProjetDto[];
   
+  form = new FormGroup({
+    fromDate: new FormControl(null, { validators: [Validators.required]}),
+    toDate: new FormControl(null, { validators: [Validators.required]})
+  });
+
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  displayedColumns: string[] = ['libelle', 'date_debut', 'date_fin', 'projet'];
+  dataSource = new MatTableDataSource<LignesProjetDto>();
 
   constructor(private api: ApiService, private api_stat: StatisticsService) { 
     this._getStatistics();
   }
   
-
   ngOnInit(): void {
     this._getProjets();
     this._getLignes();
   }
   
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+
   private _getProjets(){
     this.api.getAllProjetFromServer().subscribe(data => {
       this.listProjets = data;    
@@ -67,6 +85,7 @@ export class DashboardComponent implements OnInit {
   private _getLignes(){
     this.api.getAllLigneFromServer().subscribe(data => {
       this.listLignes = data;
+      this.dataSource.data = data;
     })
   }
 
@@ -254,5 +273,22 @@ export class DashboardComponent implements OnInit {
 
   getCount(element: number){
     return transfoSecEnJHMS(element);
+  }
+
+  applyDateFilter() {
+    console.log(new Date(this.form.value.fromDate).getTime());
+    // this.dataSource.data = this.api.getAllLigneFromServer().subscribe();
+    this.dataSource.data = this.dataSource.data.filter(e=> new Date(e.dateDebut).getTime() >= new Date(this.form.value.fromDate).getTime()
+        && new Date(e.dateFin).getTime() <= new Date(this.form.value.toDate).getTime()
+       );
+
+      
+  }
+
+  onClear(){
+    this.ngOnInit();
+  }
+  doFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }

@@ -165,7 +165,6 @@ export class AjoutProjetComponent implements OnInit {
       this.lignes = data;
 
       this.options = this.getTache(this.lignes);
-      console.log(this.options);
     })
   }
 

@@ -1,179 +1,235 @@
-<div class="container">
-    <mat-card class="example-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Temps moyen</mat-card-title>
-            <mat-card-subtitle>All projet </mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p class="calcul-temps-card">
-                {{ getMoyenneP(listProjets) }}
-            </p>
-        </mat-card-content>
-    </mat-card>
+<mat-tab-group mat-align-tabs="center" dynamicHeight>
+    <mat-tab label="En chiffres">
+        <h1> Quelques chiffres </h1>
+        <div class="container">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Temps moyen</mat-card-title>
+                    <mat-card-subtitle>All projet </mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p class="calcul-temps-card">
+                        {{ getMoyenneP(listProjets) }}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Temps moyen</mat-card-title>
+                    <mat-card-subtitle>Top 10 projet</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p class="calcul-temps-card">
+                        {{ getMoyenneP(topProjets) }}
+                    </p>
+                </mat-card-content>
+            </mat-card>   
+            
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Temps médian</mat-card-title>
+                    <mat-card-subtitle>All Projet</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p class="calcul-temps-card">
+                        {{ getMediane(listProjets) }}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+            
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Temps médian</mat-card-title>
+                    <mat-card-subtitle>Top 10 projet</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p class="calcul-temps-card">
+                        {{ getMediane(topProjets) }}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        
+        
+        
+        <div class="container">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Projet le plus long</mat-card-title>
+                    <mat-card-subtitle>{{ topProjets?.slice(0, 1).shift().nom }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p class="calcul-temps-card">
+                        {{ getCount(topProjets?.slice(0, 1).shift().tempsTotal) }}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Moyenne de tâche par projet</mat-card-title>
+                    <mat-card-subtitle>en unité</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p class="calcul-temps-card">
+                        {{ getMoyenneL(listProjets) }}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Tâche la plus longue</mat-card-title>
+                    <mat-card-subtitle>{{ topLignes?.slice(0, 1).shift().libelle }}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p class="calcul-temps-card">
+                        {{ getCount(topLignes?.slice(0, 1).shift().tempsTotal) }}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Tâche la plus utilisée</mat-card-title>
+                    <mat-card-subtitle>parmis tous les projets</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p class="calcul-temps-card">
+                        {{  getMostUsedTache() }}
+                    </p>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </mat-tab>
     
-    <mat-card class="example-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Temps moyen</mat-card-title>
-            <mat-card-subtitle>Top 10 projet</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p class="calcul-temps-card">
-                {{ getMoyenneP(topProjets) }}
-            </p>
-        </mat-card-content>
-    </mat-card>   
-    
-    <mat-card class="example-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Temps médian</mat-card-title>
-            <mat-card-subtitle>All Projet</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p class="calcul-temps-card">
-                {{ getMediane(listProjets) }}
-            </p>
-        </mat-card-content>
-    </mat-card>
-    
-    <mat-card class="example-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Temps médian</mat-card-title>
-            <mat-card-subtitle>Top 10 projet</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p class="calcul-temps-card">
-                {{ getMediane(topProjets) }}
-            </p>
-        </mat-card-content>
-    </mat-card>
-</div>
+    <mat-tab label="Graphique">
+        <h1>Graphique</h1>
+        <div class="box">
+            <div class="container">
+                <mat-card class="card-chart">
+                    <mat-card-header>
+                        <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title>Top 10 Projets</mat-card-title>
+                        <mat-card-subtitle>Nombre d'heures passées par projet</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <div id="chart">
+                            <apx-chart
+                              [series]="chartOptions.series"
+                              [chart]="chartOptions.chart"
+                              [dataLabels]="chartOptions.dataLabels"
+                              [stroke]="chartOptions.stroke"
+                              [colors]="chartOptions.colors"
+                              [title]="chartOptions.title"
+                              [subtitle]="chartOptions.subtitle"
+                              [plotOptions]="chartOptions.plotOptions"
+                              [yaxis]="chartOptions.yaxis"
+                              [xaxis]="chartOptions.xaxis"
+                              [tooltip]="chartOptions.tooltip"
+                            ></apx-chart>
+                          </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </div>
+    </mat-tab>
 
-<div class="container">
-    <mat-card class="card-chart">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Top 10 Projets</mat-card-title>
-            <mat-card-subtitle>Nombre d'heures passées par projet</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <div id="chart">
-                <apx-chart
-                  [series]="chartOptions.series"
-                  [chart]="chartOptions.chart"
-                  [dataLabels]="chartOptions.dataLabels"
-                  [stroke]="chartOptions.stroke"
-                  [colors]="chartOptions.colors"
-                  [title]="chartOptions.title"
-                  [subtitle]="chartOptions.subtitle"
-                  [plotOptions]="chartOptions.plotOptions"
-                  [yaxis]="chartOptions.yaxis"
-                  [xaxis]="chartOptions.xaxis"
-                  [tooltip]="chartOptions.tooltip"
-                ></apx-chart>
-              </div>
-        </mat-card-content>
-    </mat-card>
-</div>
+    <mat-tab label="Tableau des dates">
+        <h1> Tâches par date </h1>
+        <div class="box">
+            <div class="container">
+                <form [formGroup]="form" (submit)="applyDateFilter()">
+                    <mat-form-field>
+                        <input 
+                        matInput 
+                        placeholder="Date From" 
+                        [matDatepicker]="picker1"
+                        formControlName="fromDate"
+                        required
+                        (click)="picker1.open()"
+                        >
+                        <mat-datepicker-toggle 
+                        matSuffix [for]="picker1"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker 
+                        #picker1></mat-datepicker>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input 
+                        matInput 
+                        placeholder="toDate" 
+                        [matDatepicker]="picker2"
+                        formControlName="toDate"
+                        required
+                        (click)="picker2.open()"
+                        >
+                        <mat-datepicker-toggle 
+                        matSuffix [for]="picker2"
+                        ></mat-datepicker-toggle>
+                        <mat-datepicker 
+                        #picker2></mat-datepicker>
+                    </mat-form-field>
+                    <button 
+                    class="button-form" 
+                    mat-raised-button color="accent" 
+                    (click)="applyDateFilter()"
+                    [disabled]="form.invalid">Submit</button>
+                    <button mat-raised-button color="accent" type="button" [disabled]="form.invalid" (click)="onClear()">Clear</button>
+                </form>
+        
+                <mat-form-field>
+                    <input matInput type="text" #filter (keyup)="doFilter(filter.value)" placeholder="Filter">
+                </mat-form-field>
+            </div>
+            <div class="mat-elevation-z8">
+                <table mat-table 
+                #filteredTable
+                [dataSource]="dataSource" 
+                matSort
+                matSortActive="date"
+                matSortDirection="desc">
+        
+                    <ng-container matColumnDef="libelle">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> libelle </th>
+                        <td mat-cell *matCellDef="let element"> {{element.libelle}} </td>
+                    </ng-container>
+                    
+                    <ng-container matColumnDef="date_debut">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> dateDebut </th>
+                        <td mat-cell *matCellDef="let element"> {{element.dateDebut | date: 'dd/MM/yyyy'}} </td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="date_fin">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> dateFin </th>
+                        <td mat-cell *matCellDef="let element"> {{element.dateFin | date: 'dd/MM/yyyy'}} </td>
+                    </ng-container>
+            
+                    <ng-container matColumnDef="projet">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> projet </th>
+                        <td mat-cell *matCellDef="let element"> {{element.plainProjetDto.nom }} </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    
+                    <!-- Row shown when there is no matching data. -->
+                    <tr class="mat-row" *matNoDataRow>
+                    <!-- <td class="mat-cell" colspan="4">Le projet : "{{input.value}}" n'existe pas</td> -->
+                    </tr>
+                </table>
+                <mat-paginator [length]="100" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+        </div>
+    </mat-tab>
+</mat-tab-group>
 
-<div class="container">
-    <mat-card class="example-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Projet le plus long</mat-card-title>
-            <mat-card-subtitle>{{ topProjets?.slice(0, 1).shift().nom }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p class="calcul-temps-card">
-                {{ getCount(topProjets?.slice(0, 1).shift().tempsTotal) }}
-            </p>
-        </mat-card-content>
-    </mat-card>
 
-    <mat-card class="example-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Moyenne de tâche par projet</mat-card-title>
-            <mat-card-subtitle>en unité</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p class="calcul-temps-card">
-                {{ getMoyenneL(listProjets) }}
-            </p>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="example-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Tâche la plus longue</mat-card-title>
-            <mat-card-subtitle>{{ topLignes?.slice(0, 1).shift().libelle }}</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p class="calcul-temps-card">
-                {{ getCount(topLignes?.slice(0, 1).shift().tempsTotal) }}
-            </p>
-        </mat-card-content>
-    </mat-card>
-
-    <mat-card class="example-card">
-        <mat-card-header>
-            <div mat-card-avatar class="example-header-image"></div>
-            <mat-card-title>Tâche la plus utilisée</mat-card-title>
-            <mat-card-subtitle>parmis tous les projets</mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-            <p class="calcul-temps-card">
-                {{  getMostUsedTache() }}
-            </p>
-        </mat-card-content>
-    </mat-card>
-</div>
-<!-- <p *ngFor="let top of topProjets; let i = index">
-    TOP : {{ i + 1 }} {{ top.tempsTotal }} {{ top.nom }}
-</p>
-
-<p>
-    Moyenne temps (all projet) : {{ getMoyenneP(listProjets) }}
-    Moyenne temps (Top 10 projet) : {{ getMoyenneP(topProjets) }}
-</p>
-
-<p>
-    Médiane temps (all projet) : {{ getMediane(listProjets) }}
-    Médiane temps (Top 10 projet) : {{ getMediane(topProjets) }}
-</p> -->
-
-<!-- <p>
-    Projet le plus long : {{ topProjets?.slice(0, 1).shift().nom }} avec une durée de {{ getCount(topProjets?.slice(0, 1).shift().tempsTotal) }}
-</p>
-
-<p>
-    Moyenne de tâche par projet : {{ getMoyenneL(listProjets) }}
-</p>
-
-<p>
-    Tâche la plus longue : {{ topLignes?.slice(0, 1).shift().libelle }} avec une durée de {{ getCount(topLignes?.slice(0, 1).shift().tempsTotal) }}
-</p>
-
-<p>
-    Tâche la plus utilisée : {{  getMostUsedTache() }}
-</p> -->
-
-<!-- <div id="chart">
-    <apx-chart
-      [series]="chartOptions.series"
-      [chart]="chartOptions.chart"
-      [dataLabels]="chartOptions.dataLabels"
-      [stroke]="chartOptions.stroke"
-      [colors]="chartOptions.colors"
-      [title]="chartOptions.title"
-      [subtitle]="chartOptions.subtitle"
-      [plotOptions]="chartOptions.plotOptions"
-      [yaxis]="chartOptions.yaxis"
-      [xaxis]="chartOptions.xaxis"
-      [tooltip]="chartOptions.tooltip"
-    ></apx-chart>
-  </div> -->
