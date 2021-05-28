@@ -152,7 +152,7 @@
                     <mat-form-field>
                         <input 
                         matInput 
-                        placeholder="Date From" 
+                        placeholder="Date Début" 
                         [matDatepicker]="picker1"
                         formControlName="fromDate"
                         required
@@ -167,7 +167,7 @@
                     <mat-form-field>
                         <input 
                         matInput 
-                        placeholder="toDate" 
+                        placeholder="Date de Fin" 
                         [matDatepicker]="picker2"
                         formControlName="toDate"
                         required
@@ -183,12 +183,12 @@
                     class="button-form" 
                     mat-raised-button color="accent" 
                     (click)="applyDateFilter()"
-                    [disabled]="form.invalid">Submit</button>
-                    <button mat-raised-button color="accent" type="button" [disabled]="form.invalid" (click)="onClear()">Clear</button>
+                    [disabled]="form.invalid">Filtrer avec les dates</button>
+                    <button mat-raised-button color="accent" type="button" [disabled]="form.invalid" (click)="onClear()">Réinitialiser le filtre</button>
                 </form>
         
                 <mat-form-field>
-                    <input matInput type="text" #filter (keyup)="doFilter(filter.value)" placeholder="Filter">
+                    <input matInput type="text" #filter (keyup)="doFilter(filter.value)" placeholder="Filter : Ex. Tâche, Nom...">
                 </mat-form-field>
             </div>
             <div class="mat-elevation-z8">
