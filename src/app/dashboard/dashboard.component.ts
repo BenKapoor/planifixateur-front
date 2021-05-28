@@ -280,14 +280,13 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     // this.dataSource.data = this.api.getAllLigneFromServer().subscribe();
     this.dataSource.data = this.dataSource.data.filter(e=> new Date(e.dateDebut).getTime() >= new Date(this.form.value.fromDate).getTime()
         && new Date(e.dateFin).getTime() <= new Date(this.form.value.toDate).getTime()
-       );
-
-      
+       ); 
   }
 
   onClear(){
     this.ngOnInit();
   }
+  
   doFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
